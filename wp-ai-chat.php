@@ -1,7 +1,7 @@
 <?php
 /*
-Plugin Name: 小半WordPress ai助手
-Description: WordPress Ai助手插件，支持对话聊天、文章生成、文章总结、ai生成PPT，可对接deepseek、通义千问、豆包等模型以及智能体应用。
+Plugin Name: Asistente de IA para WordPress Xiaoban
+Description: Plugin de asistente de IA para WordPress, soporta chat de conversación, generación de artículos, resumen de artículos, generación de PPT con IA, y puede conectarse a modelos como DeepSeek, Tongyi Qianwen, Doubao, y aplicaciones de agentes inteligentes.
 Plugin URI: https://www.jingxialai.com/4827.html
 Version: 4.0.5
 Author: Summer

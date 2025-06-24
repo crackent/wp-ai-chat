@@ -1,16 +1,16 @@
 <?php
 
 if ( ! defined( 'ABSPATH' ) ) {
-    exit; // 防止直接访问
+    exit; // Prevenir acceso directo
 }
 
-// 注册设置
+// Registrar configuración
 function wpatai_register_settings() {
     register_setting( 'wpatai_options_group', 'wpatai_settings' );
 }
 add_action( 'admin_init', 'wpatai_register_settings' );
 
-// 后台设置页面
+// Página de configuración del panel de administración
 function wpatai_settings_page() {
     $options = get_option( 'wpatai_settings' );
     if ( ! is_array( $options ) ) {
@@ -68,7 +68,7 @@ function wpatai_settings_page() {
         .wpatai_wrap input[type="submit"]:hover {
             background: #005a8e;
         }
-        /* 保存成功提示框 */
+        /* Mensaje de éxito al guardar */
         #wpatai-save-success {
             background: #d4edda;
             color: #155724;
@@ -80,10 +80,10 @@ function wpatai_settings_page() {
         }
     </style>
     <div class="wpatai_wrap">
-        <h1>文章翻译朗读设置</h1>
+        <h1>Configuración de traducción y lectura de artículos</h1>
 
         <?php if (isset($_GET['settings-updated']) && $_GET['settings-updated']): ?>
-            <div id="wpatai-save-success">保存成功！</div>
+            <div id="wpatai-save-success">¡Guardado exitosamente!</div>
             <script>
                 setTimeout(() => {
                     let successMsg = document.getElementById('wpatai-save-success');
@@ -97,27 +97,27 @@ function wpatai_settings_page() {
         <form method="post" action="options.php">
             <?php settings_fields( 'wpatai_options_group' ); ?>
             <table class="form-table">
-                <!-- 启用翻译服务 -->
+                <!-- Habilitar servicio de traducción -->
                 <tr valign="top">
-                    <th scope="row">启用翻译服务</th>
+                    <th scope="row">Habilitar servicio de traducción</th>
                     <td>
                         <input type="checkbox" name="wpatai_settings[enable_translation]" value="1" <?php checked( 1, isset( $options['enable_translation'] ) ? $options['enable_translation'] : 0 ); ?> />
-                        <label for="enable_translation">启用文章内容AI翻译功能</label>
+                        <label for="enable_translation">Habilitar función de traducción de contenido de artículos con IA</label>
                     </td>
                 </tr>
-                <!-- 选择调用的 API 接口 -->
+                <!-- Seleccionar interfaz API -->
                 <tr valign="top">
-                    <th scope="row">选择API接口</th>
+                    <th scope="row">Seleccionar interfaz API</th>
                     <td>
                         <?php $selected_api = isset( $options['selected_api'] ) ? $options['selected_api'] : 'deepseek'; ?>
                         <select name="wpatai_settings[selected_api]">
                             <option value="deepseek" <?php selected( $selected_api, 'deepseek' ); ?>>DeepSeek</option>
-                            <option value="tongyi" <?php selected( $selected_api, 'tongyi' ); ?>>通义千问</option>
-                            <option value="doubao" <?php selected( $selected_api, 'doubao' ); ?>>豆包AI</option>
+                            <option value="tongyi" <?php selected( $selected_api, 'tongyi' ); ?>>通义千问 (Tongyi Qianwen)</option>
+                            <option value="doubao" <?php selected( $selected_api, 'doubao' ); ?>>豆包AI (Doubao AI)</option>
                         </select>
                     </td>
                 </tr>
-                <!-- DeepSeek 设置 -->
+                <!-- Configuración de DeepSeek -->
                 <tr valign="top">
                     <th scope="row">DeepSeek API Key</th>
                     <td>
@@ -125,141 +125,141 @@ function wpatai_settings_page() {
                     </td>
                 </tr>
                 <tr valign="top">
-                    <th scope="row">DeepSeek 模型参数</th>
+                    <th scope="row">Parámetros del modelo DeepSeek</th>
                     <td>
                         <input type="text" name="wpatai_settings[deepseek_model]" value="<?php echo isset( $options['deepseek_model'] ) ? esc_attr( $options['deepseek_model'] ) : 'deepseek-chat'; ?>" size="50" />
                     </td>
                 </tr>
-                <!-- 通义千问 设置 -->
+                <!-- Configuración de Tongyi Qianwen -->
                 <tr valign="top">
-                    <th scope="row">通义千问 API Key</th>
+                    <th scope="row">Tongyi Qianwen API Key</th>
                     <td>
                         <input type="text" name="wpatai_settings[tongyi_api_key]" value="<?php echo isset( $options['tongyi_api_key'] ) ? esc_attr( $options['tongyi_api_key'] ) : ''; ?>" size="50" />
                     </td>
                 </tr>
                 <tr valign="top">
-                    <th scope="row">通义千问 模型参数</th>
+                    <th scope="row">Parámetros del modelo Tongyi Qianwen</th>
                     <td>
                         <input type="text" name="wpatai_settings[tongyi_model]" value="<?php echo isset( $options['tongyi_model'] ) ? esc_attr( $options['tongyi_model'] ) : 'qwen-plus'; ?>" size="50" />
                     </td>
                 </tr>
-                <!-- 豆包AI 设置 -->
+                <!-- Configuración de Doubao AI -->
                 <tr valign="top">
-                    <th scope="row">豆包AI API Key</th>
+                    <th scope="row">Doubao AI API Key</th>
                     <td>
                         <input type="text" name="wpatai_settings[doubao_api_key]" value="<?php echo isset( $options['doubao_api_key'] ) ? esc_attr( $options['doubao_api_key'] ) : ''; ?>" size="50" />
                     </td>
                 </tr>
                 <tr valign="top">
-                    <th scope="row">豆包AI 模型参数</th>
+                    <th scope="row">Parámetros del modelo Doubao AI</th>
                     <td>
                         <input type="text" name="wpatai_settings[doubao_model]" value="<?php echo isset( $options['doubao_model'] ) ? esc_attr( $options['doubao_model'] ) : ''; ?>" size="50" />
                     </td>
                 </tr>
-                <!-- 翻译语言设置 -->
+                <!-- Configuración de idiomas de traducción -->
                 <tr valign="top">
-                    <th scope="row">翻译语言设置</th>
+                    <th scope="row">Configuración de idiomas de traducción</th>
                     <td>
                         <input type="text" name="wpatai_settings[translation_languages]" value="<?php echo isset( $options['translation_languages'] ) ? esc_attr( $options['translation_languages'] ) : '中文,英文,韩语,日语'; ?>" size="50" />
-                        <p class="description">请输入翻译语言，多个语言请用逗号分隔，如：中文,英文,韩语,日语</p>
+                        <p class="description">Ingrese los idiomas de traducción, separe varios idiomas con comas, por ejemplo: Chino,Inglés,Coreano,Japonés</p>
                     </td>
                 </tr>
-                <!-- 文章翻译方式 -->
+                <!-- Método de traducción de artículos -->
                 <tr valign="top">
-                    <th scope="row">文章翻译方式</th>
+                    <th scope="row">Método de traducción de artículos</th>
                     <td>
                         <?php $translation_type = isset( $options['translation_type'] ) ? $options['translation_type'] : 'full'; ?>
                         <label>
                             <input type="radio" name="wpatai_settings[translation_type]" value="full" <?php checked( $translation_type, 'full' ); ?> />
-                            全文覆盖翻译（完全替换原文，仅显示翻译内容）
+                            Traducción de cobertura completa (reemplaza completamente el texto original, solo muestra el contenido traducido)
                         </label><br>
                         <label>
                             <input type="radio" name="wpatai_settings[translation_type]" value="compare" <?php checked( $translation_type, 'compare' ); ?> />
-                            对比翻译（每段文字显示：原文 + 翻译结果）
+                            Traducción comparativa (cada párrafo muestra: texto original + resultado de la traducción)
                         </label>
                     </td>
                 </tr>
-                <!-- 语音朗读设置 -->
+                <!-- Configuración de lectura en voz alta -->
                 <tr valign="top">
-                    <th scope="row">启用语音朗读</th>
+                    <th scope="row">Habilitar lectura en voz alta</th>
                     <td>
                         <input type="checkbox" name="wpatai_settings[enable_tts]" value="1" <?php checked( 1, isset( $options['enable_tts'] ) ? $options['enable_tts'] : 0 ); ?> />
-                        <label for="enable_tts">启用文章内容语音朗读功能</label>
+                        <label for="enable_tts">Habilitar función de lectura en voz alta del contenido del artículo</label>
                     </td>
                 </tr>
-                <!-- 语音合成接口选择 -->
+                <!-- Selección de interfaz de síntesis de voz -->
                 <tr valign="top">
-                    <th scope="row">语音合成接口</th>
+                    <th scope="row">Interfaz de síntesis de voz</th>
                     <td>
                         <?php $tts_interface = isset( $options['tts_interface'] ) ? $options['tts_interface'] : 'tencent'; ?>
                         <select name="wpatai_settings[tts_interface]">
-                            <option value="tencent" <?php selected( $tts_interface, 'tencent' ); ?>>腾讯云</option>
-                            <option value="baidu" <?php selected( $tts_interface, 'baidu' ); ?>>百度云</option>
+                            <option value="tencent" <?php selected( $tts_interface, 'tencent' ); ?>>Tencent Cloud</option>
+                            <option value="baidu" <?php selected( $tts_interface, 'baidu' ); ?>>Baidu Cloud</option>
                         </select>
                     </td>
                 </tr>
-                <!-- 腾讯云设置 -->
+                <!-- Configuración de Tencent Cloud -->
                 <tr valign="top">
-                    <th scope="row">腾讯云 SecretId</th>
+                    <th scope="row">Tencent Cloud SecretId</th>
                     <td>
                         <input type="text" name="wpatai_settings[tencent_secret_id]" value="<?php echo isset( $options['tencent_secret_id'] ) ? esc_attr( $options['tencent_secret_id'] ) : ''; ?>" size="50" />
                     </td>
                 </tr>
                 <tr valign="top">
-                    <th scope="row">腾讯云 SecretKey</th>
+                    <th scope="row">Tencent Cloud SecretKey</th>
                     <td>
                         <input type="text" name="wpatai_settings[tencent_secret_key]" value="<?php echo isset( $options['tencent_secret_key'] ) ? esc_attr( $options['tencent_secret_key'] ) : ''; ?>" size="50" />
                     </td>
                 </tr>
-                <!-- 腾讯云音库值 -->
+                <!-- Valor de la biblioteca de voz de Tencent Cloud -->
                 <tr valign="top">
-                    <th scope="row">腾讯云音库值</th>
+                    <th scope="row">Valor de la biblioteca de voz de Tencent Cloud</th>
                     <td>
                         <input type="text" name="wpatai_settings[tencent_voice_type]" value="<?php echo isset( $options['tencent_voice_type'] ) ? esc_attr( $options['tencent_voice_type'] ) : '0'; ?>" size="10" />
-                        <p class="description">请输入腾讯云语音合成的音库值（VoiceType），默认值为 0。</p>
+                        <p class="description">Ingrese el valor de la biblioteca de voz (VoiceType) para la síntesis de voz de Tencent Cloud, el valor predeterminado es 0.</p>
                     </td>
                 </tr>
-                <!-- 百度云设置 -->
+                <!-- Configuración de Baidu Cloud -->
                 <tr valign="top">
-                    <th scope="row">百度云 API_KEY</th>
+                    <th scope="row">Baidu Cloud API_KEY</th>
                     <td>
                         <input type="text" name="wpatai_settings[baidu_api_key]" value="<?php echo isset( $options['baidu_api_key'] ) ? esc_attr( $options['baidu_api_key'] ) : ''; ?>" size="50" />
                     </td>
                 </tr>
                 <tr valign="top">
-                    <th scope="row">百度云 SECRET_KEY</th>
+                    <th scope="row">Baidu Cloud SECRET_KEY</th>
                     <td>
                         <input type="text" name="wpatai_settings[baidu_secret_key]" value="<?php echo isset( $options['baidu_secret_key'] ) ? esc_attr( $options['baidu_secret_key'] ) : ''; ?>" size="50" />
                     </td>
                 </tr>
-                <!-- 百度云音库值 -->
+                <!-- Valor de la biblioteca de voz de Baidu Cloud -->
                 <tr valign="top">
-                    <th scope="row">百度云音库值</th>
+                    <th scope="row">Valor de la biblioteca de voz de Baidu Cloud</th>
                     <td>
                         <input type="text" name="wpatai_settings[baidu_per]" value="<?php echo isset( $options['baidu_per'] ) ? esc_attr( $options['baidu_per'] ) : '0'; ?>" size="10" />
-                        <p class="description">请输入百度云语音合成的音库值（per），默认值为 0。</p>
+                        <p class="description">Ingrese el valor de la biblioteca de voz (per) para la síntesis de voz de Baidu Cloud, el valor predeterminado es 0.</p>
                     </td>
                 </tr>
-                <!-- 排除的文章不加载翻译和语音 -->
+                <!-- Excluir IDs de artículos de traducción y voz -->
                 <tr valign="top">
-                    <th scope="row">排除文章的ID</th>
+                    <th scope="row">IDs de artículos a excluir</th>
                     <td>
                         <input type="text" name="wpatai_settings[exclude_post_ids]" value="<?php echo isset( $options['exclude_post_ids'] ) ? esc_attr( $options['exclude_post_ids'] ) : ''; ?>" size="50" />
-                        <p class="description">请输入要排除的文章 ID，多个 ID 用英文逗号分隔，排除的文章不加载翻译和语音。</p>
+                        <p class="description">Ingrese los IDs de los artículos a excluir, separe varios IDs con comas. Los artículos excluidos no cargarán la traducción ni la voz.</p>
                     </td>
                 </tr>                
             </table>
             <?php submit_button(); ?>
         </form>
-        <p>文章翻译和朗读功能原本是单独的插件，是后面合并进ai助手里面的。<br>
-        模型要支持长文本才能翻译，毕竟文章内容一般都很多，而有的ai模型一次只能接收很短的内容。<br>
-    语音合成接口采用的都是短文本，通过分段提交实现朗读，如果用长文本收费会更贵。<br>
-如果你要全站免费翻译，推荐我另外一个专业的多语言插件：<a href="https://www.wujiit.com/wptr" target="_blank">小半多语言翻译</a></p>
+        <p>La función de traducción y lectura de artículos era originalmente un plugin separado, que luego se fusionó con el asistente de IA.<br>
+        El modelo debe admitir texto largo para poder traducir, ya que el contenido de los artículos suele ser extenso, y algunos modelos de IA solo pueden recibir contenido muy corto a la vez.<br>
+    Las interfaces de síntesis de voz utilizan texto corto, logrando la lectura mediante el envío por segmentos. Si se utilizara texto largo, la tarifa sería más cara.<br>
+Si desea una traducción gratuita para todo el sitio, le recomiendo mi otro plugin profesional multilingüe: <a href="https://www.wujiit.com/wptr" target="_blank">小半多语言翻译 (Xiaoban Multi-language Translation)</a></p>
     </div>
     <?php
 }
 
-// 文章添加控制面板
+// Panel de control de adición de artículos
 function wpatai_append_control_bar( $content ) {
     if ( ! is_singular( 'post' ) ) {
         return $content;
@@ -267,27 +267,27 @@ function wpatai_append_control_bar( $content ) {
     $options = get_option( 'wpatai_settings' );
     $post_id = get_the_ID();
 
-    // 检查是否在排除列表中
+    // Comprobar si está en la lista de exclusión
     $exclude_post_ids = isset( $options['exclude_post_ids'] ) ? explode( ',', $options['exclude_post_ids'] ) : [];
     $exclude_post_ids = array_map( 'trim', $exclude_post_ids );
     if ( in_array( strval( $post_id ), $exclude_post_ids ) ) {
         return $content;
     }
 
-    // 若翻译与朗读均未启用，则不添加
+    // Si la traducción y la lectura no están habilitadas, no agregar
     if ( empty( $options['enable_translation'] ) && empty( $options['enable_tts'] ) ) {
         return $content;
     }
     
-    // 构造控制面板容器，附带文章ID及翻译模式
+    // Construir contenedor del panel de control, con ID de artículo y modo de traducción
     $control_panel  = '<div class="wpatai-control-panel" data-postid="' . $post_id . '" data-translation-type="' . esc_attr( isset( $options['translation_type'] ) ? $options['translation_type'] : 'full' ) . '">';
     
-    // 语音朗读按钮
+    // Botón de lectura de voz
     if ( ! empty( $options['enable_tts'] ) ) {
-        $control_panel .= '<span class="wpatai-tts-btn" title="朗读文章" style="cursor:pointer; margin-right:15px; font-size:22px;">&#128266;</span>';
+        $control_panel .= '<span class="wpatai-tts-btn" title="Leer artículo" style="cursor:pointer; margin-right:15px; font-size:22px;">&#128266;</span>';
     }
     
-    // 翻译语言按钮
+    // Botón de idioma de traducción
     if ( ! empty( $options['enable_translation'] ) ) {
         $languages = array_filter( array_map( 'trim', explode( ',', $options['translation_languages'] ) ) );
         if ( ! empty( $languages ) ) {
@@ -301,7 +301,7 @@ function wpatai_append_control_bar( $content ) {
     
     $control_panel .= '</div>';
     
-    // 包裹文章内容，便于后续更新翻译结果
+    // Envolver el contenido del artículo para futuras actualizaciones de resultados de traducción
     $wrapped_content = '<div id="wpatai-post-content">' . $content . '</div>';
     
     return $control_panel . $wrapped_content;
@@ -309,18 +309,18 @@ function wpatai_append_control_bar( $content ) {
 add_filter( 'the_content', 'wpatai_append_control_bar' );
 
 
-// 文章页加载
+// Carga de la página del artículo
 function wpatai_enqueue_assets() {
     if ( ! is_singular( 'post' ) ) {
         return;
     }
 
     $options = get_option( 'wpatai_settings' );
-    // 获取当前文章ID
+    // Obtener ID del artículo actual
     $post_id = get_the_ID();
     $exclude_post_ids = isset( $options['exclude_post_ids'] ) ? explode( ',', $options['exclude_post_ids'] ) : [];
     $exclude_post_ids = array_map( 'trim', $exclude_post_ids );
-    // 检查当前文章ID是否在排除列表中
+    // Comprobar si el ID del artículo actual está en la lista de exclusión
     if ( in_array( strval( $post_id ), $exclude_post_ids ) ) {
         return;
     }
@@ -329,11 +329,11 @@ function wpatai_enqueue_assets() {
         return;
     }
 
-    // 输出内联CSS
+    // Salida de CSS en línea
     add_action('wp_head', function() {
         ?>
         <style>
-            /* 整体控制面板 */
+            /* Panel de control general */
             .wpatai-control-panel {
                 background: #f9f9f9;
                 padding: 8px 12px;
@@ -344,7 +344,7 @@ function wpatai_enqueue_assets() {
                 align-items: center;
                 flex-wrap: wrap;
             }
-            /* 语音朗读图标按钮 */
+            /* Botón de icono de lectura de voz */
             .wpatai-tts-btn {
                 font-size: 22px;
                 cursor: pointer;
@@ -353,7 +353,7 @@ function wpatai_enqueue_assets() {
             .wpatai-tts-btn:hover {
                 opacity: 0.8;
             }
-            /* 翻译按钮 */
+            /* Botón de traducción */
             .wpatai-language-switcher span.wpatai-translate-btn {
                 display: inline-block;
                 padding: 5px 10px;
@@ -372,7 +372,7 @@ function wpatai_enqueue_assets() {
         <?php
     });
 
-    // 加载JS脚本
+    // Cargar script JS
     wp_enqueue_script( 'wpatai-script', plugin_dir_url( __FILE__ ) . 'wpai-script.js', array( 'jquery' ), '2.2', true );
     wp_localize_script( 'wpatai-script', 'wpatai_ajax_obj', array(
         'ajax_url'  => admin_url( 'admin-ajax.php' ),
@@ -383,7 +383,7 @@ function wpatai_enqueue_assets() {
 add_action( 'wp_enqueue_scripts', 'wpatai_enqueue_assets' );
 
 
-// AJAX 处理翻译请求
+// Manejar solicitud de traducción AJAX
 function wpatai_handle_translation() {
     check_ajax_referer( 'wpatai_translate_nonce', 'nonce' );
     
@@ -391,12 +391,12 @@ function wpatai_handle_translation() {
     $target_language = isset( $_POST['target_language'] ) ? sanitize_text_field( $_POST['target_language'] ) : '';
     
     if ( ! $post_id || empty( $target_language ) ) {
-        wp_send_json_error( '无效参数' );
+        wp_send_json_error( 'Parámetro inválido' );
     }
     
     $post = get_post( $post_id );
     if ( ! $post ) {
-        wp_send_json_error( '未找到文章' );
+        wp_send_json_error( 'Artículo no encontrado' );
     }
     $original_content = $post->post_content;
     
@@ -404,7 +404,7 @@ function wpatai_handle_translation() {
     $selected_api     = isset( $options['selected_api'] ) ? $options['selected_api'] : 'deepseek';
     $translation_type = isset( $options['translation_type'] ) ? $options['translation_type'] : 'full';
     
-    // 对文章HTML进行处理，提取纯文字部分，调用AI翻译API，并生成最终HTML。
+    // Procesar HTML del artículo, extraer texto plano, llamar a la API de traducción de IA y generar HTML final.
     $translated_content = wpatai_translate_content( $original_content, $target_language, $translation_type, $selected_api, $options );
     
     wp_send_json_success( array( 'translated_text' => $translated_content ) );
@@ -412,29 +412,29 @@ function wpatai_handle_translation() {
 add_action( 'wp_ajax_wpatai_translate', 'wpatai_handle_translation' );
 add_action( 'wp_ajax_nopriv_wpatai_translate', 'wpatai_handle_translation' );
 
-// 处理语音朗读请求
+// Manejar solicitud de lectura en voz alta
 function wpatai_handle_tts() {
-    set_time_limit(0); // 取消PHP执行时间限制
+    set_time_limit(0); // Cancelar límite de tiempo de ejecución de PHP
     check_ajax_referer( 'wpatai_tts_nonce', 'nonce' );
     
     $post_id = isset( $_POST['post_id'] ) ? intval( $_POST['post_id'] ) : 0;
     if ( ! $post_id ) {
-        wp_send_json_error( '无效参数' );
+        wp_send_json_error( 'Parámetro inválido' );
     }
     
     $post = get_post( $post_id );
     if ( ! $post ) {
-        wp_send_json_error( '未找到文章' );
+        wp_send_json_error( 'Artículo no encontrado' );
     }
-    // 只提取纯文本（排除图片、视频、代码等）
+    // Extraer solo texto plano (excluir imágenes, videos, código, etc.)
     $text = wp_strip_all_tags( $post->post_content );
     
     $options = get_option( 'wpatai_settings' );
     if ( empty( $options['enable_tts'] ) ) {
-        wp_send_json_error( '语音朗读功能未启用' );
+        wp_send_json_error( 'Función de lectura en voz alta no habilitada' );
     }
     
-    // 根据后台设置选择使用哪种语音合成接口
+    // Seleccionar la interfaz de síntesis de voz según la configuración del panel de administración
     $tts_interface = isset( $options['tts_interface'] ) ? $options['tts_interface'] : 'tencent';
     
     $audio_urls = array();
@@ -445,14 +445,14 @@ function wpatai_handle_tts() {
         $secret_id  = isset( $options['tencent_secret_id'] ) ? trim( $options['tencent_secret_id'] ) : '';
         $secret_key = isset( $options['tencent_secret_key'] ) ? trim( $options['tencent_secret_key'] ) : '';
         if ( empty( $secret_id ) || empty( $secret_key ) ) {
-            wp_send_json_error( '腾讯云凭证未配置' );
+            wp_send_json_error( 'Credenciales de Tencent Cloud no configuradas' );
         }
         $tencent_voice_type = isset($options['tencent_voice_type']) ? $options['tencent_voice_type'] : 0;
         for ($i = 0; $i < $total_length; $i += $chunk_size) {
             $chunk = mb_substr($text, $i, $chunk_size, 'UTF-8');
             $result = wpatai_call_tts_api( $chunk, $secret_id, $secret_key, $tencent_voice_type );
             if ( is_wp_error( $result ) ) {
-                wp_send_json_error( "语音合成错误，段落 $i: " . $result->get_error_message() );
+                wp_send_json_error( "Error en síntesis de voz, párrafo $i: " . $result->get_error_message() );
             }
             $audio_urls[] = $result;
         }
@@ -460,19 +460,19 @@ function wpatai_handle_tts() {
         $baidu_api_key    = isset( $options['baidu_api_key'] ) ? trim( $options['baidu_api_key'] ) : '';
         $baidu_secret_key = isset( $options['baidu_secret_key'] ) ? trim( $options['baidu_secret_key'] ) : '';
         if ( empty( $baidu_api_key ) || empty( $baidu_secret_key ) ) {
-            wp_send_json_error( '百度云凭证未配置' );
+            wp_send_json_error( 'Credenciales de Baidu Cloud no configuradas' );
         }
         $baidu_per = isset($options['baidu_per']) ? $options['baidu_per'] : 0;
         for ($i = 0; $i < $total_length; $i += $chunk_size) {
             $chunk = mb_substr($text, $i, $chunk_size, 'UTF-8');
             $result = wpatai_call_baidu_tts_api( $chunk, $baidu_api_key, $baidu_secret_key, $baidu_per );
             if ( is_wp_error( $result ) ) {
-                wp_send_json_error( "语音合成错误，段落 $i: " . $result->get_error_message() );
+                wp_send_json_error( "Error en síntesis de voz, párrafo $i: " . $result->get_error_message() );
             }
             $audio_urls[] = $result;
         }
     } else {
-        wp_send_json_error( '未配置正确的语音合成接口' );
+        wp_send_json_error( 'Interfaz de síntesis de voz no configurada correctamente' );
     }
     
     wp_send_json_success( array( 'audio_urls' => $audio_urls ) );
@@ -480,9 +480,9 @@ function wpatai_handle_tts() {
 add_action( 'wp_ajax_wpatai_tts', 'wpatai_handle_tts' );
 add_action( 'wp_ajax_nopriv_wpatai_tts', 'wpatai_handle_tts' );
 
-// 翻译处理函数
+// Función de procesamiento de traducción
 function wpatai_translate_content( $html, $target_language, $translation_type, $selected_api, $options ) {
-    $delimiter = "%%WPATAI_DELIM%%"; // 分隔符
+    $delimiter = "%%WPATAI_DELIM%%"; // Delimitador
     $tokens = array();
     $original_texts = array();
     
@@ -491,7 +491,7 @@ function wpatai_translate_content( $html, $target_language, $translation_type, $
     $doc->loadHTML('<?xml encoding="UTF-8"><div id="wpatai_wrapper">' . $html . '</div>', LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
     $xpath = new DOMXPath($doc);
     
-    // 查询所有非空文本节点（排除code、pre、script、style标签内的内容）
+    // Consultar todos los nodos de texto no vacíos (excluyendo contenido dentro de etiquetas code, pre, script, style)
     $textNodes = $xpath->query('//text()[normalize-space(.) and not(ancestor::code) and not(ancestor::pre) and not(ancestor::script) and not(ancestor::style)]');
     
     $index = 0;
@@ -514,11 +514,11 @@ function wpatai_translate_content( $html, $target_language, $translation_type, $
     }
     
     $joined_text = implode( $delimiter, $original_texts );
-    $prompt = "请将以下文本翻译成{$target_language}。文本由分隔符 \"{$delimiter}\" 分隔，请在翻译结果中使用相同的分隔符分隔每一段，并严格保持分隔符不变。请仅返回翻译后的文本，不要添加其他内容。\n\n" . $joined_text;
+    $prompt = "Por favor, traduce el siguiente texto a {$target_language}. El texto está separado por el delimitador \"{$delimiter}\". Por favor, usa el mismo delimitador para separar cada segmento en el resultado de la traducción y mantén el delimitador estrictamente. Por favor, devuelve solo el texto traducido, sin añadir ningún otro contenido.\n\n" . $joined_text;
     
     $api_result = wpatai_call_api( $prompt, $selected_api, $options );
     if ( is_wp_error( $api_result ) ) {
-        return "翻译API调用错误：" . $api_result->get_error_message();
+        return "Error al llamar a la API de traducción: " . $api_result->get_error_message();
     }
     
     $translated_segments = explode( $delimiter, $api_result );
@@ -537,15 +537,15 @@ function wpatai_translate_content( $html, $target_language, $translation_type, $
     return $final_html;
 }
 
-// 调用指定AI接口进行翻译
+// Llamar a la interfaz de IA especificada para la traducción
 function wpatai_call_api( $prompt, $selected_api, $options ) {
-    // 初始化返回错误变量
+    // Inicializar variable de error de retorno
     $last_error = null;
 
-    // DeepSeek 接口
+    // Interfaz DeepSeek
     if ( $selected_api === 'deepseek' ) {
         $api_key = isset( $options['deepseek_api_key'] ) ? $options['deepseek_api_key'] : '';
-        // 允许多个模型参数，用英文逗号分隔
+        // Permitir múltiples parámetros de modelo, separados por comas en inglés
         $models = isset( $options['deepseek_model'] ) ? explode( ',', $options['deepseek_model'] ) : array('deepseek-chat');
         $models = array_map('trim', $models);
         $endpoint = 'https://api.deepseek.com/chat/completions';
@@ -575,19 +575,19 @@ function wpatai_call_api( $prompt, $selected_api, $options ) {
             $response_body = wp_remote_retrieve_body( $response );
             $result = json_decode( $response_body, true );
             if ( ! $result ) {
-                $last_error = new WP_Error( 'api_response_parse_error', 'API 返回数据解析失败' );
+                $last_error = new WP_Error( 'api_response_parse_error', 'Fallo al analizar los datos de retorno de la API' );
                 continue;
             }
             if ( isset( $result['choices'][0]['message']['content'] ) ) {
                 return $result['choices'][0]['message']['content'];
             } else {
-                $last_error = new WP_Error( 'api_invalid_format', 'API 返回格式不正确' );
+                $last_error = new WP_Error( 'api_invalid_format', 'El formato de retorno de la API es incorrecto' );
                 continue;
             }
         }
-        return $last_error ? $last_error : new WP_Error( 'unknown_error', '未知错误' );
+        return $last_error ? $last_error : new WP_Error( 'unknown_error', 'Error desconocido' );
     }
-    // 通义千问 接口
+    // Interfaz Tongyi Qianwen
     elseif ( $selected_api === 'tongyi' ) {
         $api_key = isset( $options['tongyi_api_key'] ) ? $options['tongyi_api_key'] : '';
         $models = isset( $options['tongyi_model'] ) ? explode( ',', $options['tongyi_model'] ) : array('qwen-plus');
@@ -618,19 +618,19 @@ function wpatai_call_api( $prompt, $selected_api, $options ) {
             $response_body = wp_remote_retrieve_body( $response );
             $result = json_decode( $response_body, true );
             if ( ! $result ) {
-                $last_error = new WP_Error( 'api_response_parse_error', 'API 返回数据解析失败' );
+                $last_error = new WP_Error( 'api_response_parse_error', 'Fallo al analizar los datos de retorno de la API' );
                 continue;
             }
             if ( isset( $result['choices'][0]['message']['content'] ) ) {
                 return $result['choices'][0]['message']['content'];
             } else {
-                $last_error = new WP_Error( 'api_invalid_format', 'API 返回格式不正确' );
+                $last_error = new WP_Error( 'api_invalid_format', 'El formato de retorno de la API es incorrecto' );
                 continue;
             }
         }
-        return $last_error ? $last_error : new WP_Error( 'unknown_error', '未知错误' );
+        return $last_error ? $last_error : new WP_Error( 'unknown_error', 'Error desconocido' );
     }
-    // 豆包AI 接口
+    // Interfaz Doubao AI
     elseif ( $selected_api === 'doubao' ) {
         $api_key = isset( $options['doubao_api_key'] ) ? $options['doubao_api_key'] : '';
         $models = isset( $options['doubao_model'] ) ? explode( ',', $options['doubao_model'] ) : array('');
@@ -661,26 +661,26 @@ function wpatai_call_api( $prompt, $selected_api, $options ) {
             $response_body = wp_remote_retrieve_body( $response );
             $result = json_decode( $response_body, true );
             if ( ! $result ) {
-                $last_error = new WP_Error( 'api_response_parse_error', 'API 返回数据解析失败' );
+                $last_error = new WP_Error( 'api_response_parse_error', 'Fallo al analizar los datos de retorno de la API' );
                 continue;
             }
             if ( isset( $result['choices'][0]['message']['content'] ) ) {
                 return $result['choices'][0]['message']['content'];
             } else {
-                $last_error = new WP_Error( 'api_invalid_format', 'API 返回格式不正确' );
+                $last_error = new WP_Error( 'api_invalid_format', 'El formato de retorno de la API es incorrecto' );
                 continue;
             }
         }
-        return $last_error ? $last_error : new WP_Error( 'unknown_error', '未知错误' );
+        return $last_error ? $last_error : new WP_Error( 'unknown_error', 'Error desconocido' );
     } else {
-        return new WP_Error( 'invalid_api', '未支持的 API 接口' );
+        return new WP_Error( 'invalid_api', 'Interfaz de API no compatible' );
     }
 }
 
 
-// 腾讯云TTS接口合成语音(官方API Explorer的代码示例)
+// Tencent Cloud TTS API para síntesis de voz (ejemplo de código de la API Explorer oficial)
 function wpatai_call_tts_api( $text, $secret_id, $secret_key, $voice_type = 0 ) {
-    // 腾讯TTS接口基本参数
+    // Parámetros básicos de la interfaz TTS de Tencent
     $service    = "tts";
     $host       = "tts.tencentcloudapi.com";
     $req_region = "";
@@ -691,18 +691,18 @@ function wpatai_call_tts_api( $text, $secret_id, $secret_key, $voice_type = 0 ) 
     $timestamp  = time();
     $date       = gmdate("Y-m-d", $timestamp);
     
-    // 构造 TTS 请求参数（示例中传递 Text 与其他默认参数，可根据腾讯文档调整）
+    // Construir parámetros de solicitud TTS (ejemplo que pasa Text y otros parámetros predeterminados, se puede ajustar según la documentación de Tencent)
     $payload_arr = array(
         "Text" => $text,
         "SessionId" => uniqid(),
-        "ModelType" => 1,          // 模型类型，默认1
-        "VoiceType" => (int)$voice_type, // 使用后台设置的腾讯云音库值
-        "PrimaryLanguage" => 1,    // 语言类型（1 中文，2 英文）
+        "ModelType" => 1,          // Tipo de modelo, predeterminado 1
+        "VoiceType" => (int)$voice_type, // Usar el valor de la biblioteca de voz de Tencent Cloud configurado en el panel de administración
+        "PrimaryLanguage" => 1,    // Tipo de idioma (1 chino, 2 inglés)
         "Codec" => "mp3"
     );
     $payload = json_encode($payload_arr, JSON_UNESCAPED_UNICODE);
     
-    // ************* 步骤 1：拼接规范请求串 *************
+    // ************* Paso 1: Concatenar la cadena de solicitud canónica *************
     $http_request_method   = "POST";
     $canonical_uri         = "/";
     $canonical_querystring = "";
@@ -712,21 +712,21 @@ function wpatai_call_tts_api( $text, $secret_id, $secret_key, $voice_type = 0 ) 
     $hashed_request_payload= hash("sha256", $payload);
     $canonical_request     = "$http_request_method\n$canonical_uri\n$canonical_querystring\n$canonical_headers\n$signed_headers\n$hashed_request_payload";
     
-    // ************* 步骤 2：拼接待签名字符串 *************
+    // ************* Paso 2: Concatenar la cadena a firmar *************
     $credential_scope       = "$date/$service/tc3_request";
     $hashed_canonical_request = hash("sha256", $canonical_request);
     $string_to_sign         = "$algorithm\n$timestamp\n$credential_scope\n$hashed_canonical_request";
     
-    // ************* 步骤 3：计算签名 *************
+    // ************* Paso 3: Calcular la firma *************
     $secret_date    = wpatai_sign("TC3".$secret_key, $date);
     $secret_service = wpatai_sign($secret_date, $service);
     $secret_signing = wpatai_sign($secret_service, "tc3_request");
     $signature      = hash_hmac("sha256", $string_to_sign, $secret_signing);
     
-    // ************* 步骤 4：拼接 Authorization *************
+    // ************* Paso 4: Concatenar la autorización *************
     $authorization  = "$algorithm Credential=$secret_id/$credential_scope, SignedHeaders=$signed_headers, Signature=$signature";
     
-    // ************* 步骤 5：构造请求头并发起请求 *************
+    // ************* Paso 5: Construir encabezados de solicitud y enviar solicitud *************
     $headers = array(
         "Authorization"   => $authorization,
         "Content-Type"    => $ct,
@@ -752,32 +752,32 @@ function wpatai_call_tts_api( $text, $secret_id, $secret_key, $voice_type = 0 ) 
     $response_body = wp_remote_retrieve_body( $response );
     $result = json_decode( $response_body, true );
     if ( ! $result || ! isset( $result['Response'] ) ) {
-        return new WP_Error( 'tts_response_error', '语音合成API返回数据解析失败' );
+        return new WP_Error( 'tts_response_error', 'Fallo al analizar los datos de retorno de la API de síntesis de voz' );
     }
     if ( isset( $result['Response']['Error'] ) ) {
-        return new WP_Error( 'tts_api_error', '语音合成API错误: ' . $result['Response']['Error']['Message'] );
+        return new WP_Error( 'tts_api_error', 'Error de la API de síntesis de voz: ' . $result['Response']['Error']['Message'] );
     }
     
-    // 腾讯TTS返回的Audio字段为base64编码的音频数据
+    // El campo Audio devuelto por Tencent TTS es datos de audio codificados en base64
     if ( isset( $result['Response']['Audio'] ) ) {
         $audio_base64 = $result['Response']['Audio'];
-        // 生成data URI格式的音频链接（mp3格式）
+        // Generar enlace de audio en formato URI de datos (formato mp3)
         $audio_data_uri = 'data:audio/mp3;base64,' . $audio_base64;
         return $audio_data_uri;
     } else {
-        return new WP_Error( 'tts_invalid_response', '语音合成API返回格式不正确' );
+        return new WP_Error( 'tts_invalid_response', 'El formato de retorno de la API de síntesis de voz es incorrecto' );
     }
 }
 
-// 百度云TTS接口合成语音
+// Baidu Cloud TTS API para síntesis de voz
 function wpatai_call_baidu_tts_api( $text, $api_key, $secret_key, $per = 0 ) {
-    // 获取access token
+    // Obtener token de acceso
     $token = wpatai_get_baidu_access_token( $api_key, $secret_key );
     if ( is_wp_error( $token ) ) {
         return $token;
     }
     
-    $cuid = wp_generate_password( 16, false ); // 生成一个随机字符串，60个字符以内即可
+    $cuid = wp_generate_password( 16, false ); // Generar una cadena aleatoria, de hasta 60 caracteres
     
     $params = array(
         'tex' => $text,
@@ -788,7 +788,7 @@ function wpatai_call_baidu_tts_api( $text, $api_key, $secret_key, $per = 0 ) {
         'spd' => '5',
         'pit' => '5',
         'vol' => '5',
-        'per' => $per,  // 使用后台设置的百度云音库值
+        'per' => $per,  // Usar el valor de la biblioteca de voz de Baidu Cloud configurado en el panel de administración
         'aue' => '3'
     );
     
@@ -808,23 +808,23 @@ function wpatai_call_baidu_tts_api( $text, $api_key, $secret_key, $per = 0 ) {
         return new WP_Error( 'baidu_tts_request_error', $response->get_error_message() );
     }
     
-    // 百度接口若成功，直接返回音频二进制数据，否则返回JSON错误信息
+    // Si la interfaz de Baidu tiene éxito, devuelve directamente los datos binarios de audio; de lo contrario, devuelve información de error JSON
     $content_type = wp_remote_retrieve_header( $response, 'content-type' );
     $body = wp_remote_retrieve_body( $response );
     if ( strpos($content_type, 'application/json') !== false ) {
         $result = json_decode($body, true);
         if ( isset($result['err_no']) && $result['err_no'] != 0 ) {
-            return new WP_Error( 'baidu_tts_api_error', '百度语音合成错误: ' . $result['err_msg'] );
+            return new WP_Error( 'baidu_tts_api_error', 'Error de síntesis de voz de Baidu: ' . $result['err_msg'] );
         }
-        return new WP_Error( 'baidu_tts_invalid_response', '百度语音合成返回格式不正确' );
+        return new WP_Error( 'baidu_tts_invalid_response', 'El formato de retorno de la síntesis de voz de Baidu es incorrecto' );
     } else {
-        // 将返回的二进制音频数据转换为 base64 并生成 data URI
+        // Convertir los datos binarios de audio devueltos a base64 y generar un URI de datos
         $audio_data_uri = 'data:audio/mp3;base64,' . base64_encode($body);
         return $audio_data_uri;
     }
 }
 
-// 百度云API_KEY与SECRET_KEY获取Access Token
+// Baidu Cloud API_KEY y SECRET_KEY para obtener Access Token
 function wpatai_get_baidu_access_token( $api_key, $secret_key ) {
     $url = 'https://aip.baidubce.com/oauth/2.0/token';
     $post_data = array(
@@ -849,20 +849,20 @@ function wpatai_get_baidu_access_token( $api_key, $secret_key ) {
     if ( isset($result['access_token']) ) {
         return $result['access_token'];
     } else {
-        return new WP_Error( 'baidu_token_error', '获取百度access token失败' );
+        return new WP_Error( 'baidu_token_error', 'Fallo al obtener el token de acceso de Baidu' );
     }
 }
 
-// 计算签名函数
+// Función para calcular la firma
 function wpatai_sign($key, $msg) {
     return hash_hmac("sha256", $msg, $key, true);
 }
 
-// 对外公开的语音合成功能(其他插件可以调用语音朗读)
+// Función de síntesis de voz pública (otros plugins pueden llamar a la lectura de voz)
 function wpatai_generate_tts_audio( $text, $interface = 'tencent' ) {
     $options = get_option( 'wpatai_settings' );
 
-    // 确保只处理纯文本（排除HTML标签等）
+    // Asegurarse de procesar solo texto plano (excluir etiquetas HTML, etc.)
     $text = wp_strip_all_tags( $text );
 
     if ( $interface === 'baidu' ) {
@@ -870,22 +870,22 @@ function wpatai_generate_tts_audio( $text, $interface = 'tencent' ) {
         $baidu_secret_key = isset( $options['baidu_secret_key'] ) ? trim( $options['baidu_secret_key'] ) : '';
         $baidu_per        = isset( $options['baidu_per'] ) ? $options['baidu_per'] : 0;
         if ( empty( $baidu_api_key ) || empty( $baidu_secret_key ) ) {
-            return new WP_Error( 'baidu_credentials_error', '百度云凭证未配置' );
+            return new WP_Error( 'baidu_credentials_error', 'Credenciales de Baidu Cloud no configuradas' );
         }
         return wpatai_call_baidu_tts_api( $text, $baidu_api_key, $baidu_secret_key, $baidu_per );
     } else {
-        // 默认使用腾讯云接口
+        // Por defecto, usar la interfaz de Tencent Cloud
         $tencent_secret_id   = isset( $options['tencent_secret_id'] ) ? trim( $options['tencent_secret_id'] ) : '';
         $tencent_secret_key  = isset( $options['tencent_secret_key'] ) ? trim( $options['tencent_secret_key'] ) : '';
         $tencent_voice_type  = isset( $options['tencent_voice_type'] ) ? (int)$options['tencent_voice_type'] : 0;
         if ( empty( $tencent_secret_id ) || empty( $tencent_secret_key ) ) {
-            return new WP_Error( 'tencent_credentials_error', '腾讯云凭证未配置' );
+            return new WP_Error( 'tencent_credentials_error', 'Credenciales de Tencent Cloud no configuradas' );
         }
         return wpatai_call_tts_api( $text, $tencent_secret_id, $tencent_secret_key, $tencent_voice_type );
     }
 }
 
-// 用于接收生成的音频URL
+// Para recibir la URL de audio generada
 function wpatai_tts_generate_action( $text, $interface, $callback ) {
     $result = wpatai_generate_tts_audio( $text, $interface );
     if ( is_callable( $callback ) ) {
@@ -894,7 +894,7 @@ function wpatai_tts_generate_action( $text, $interface, $callback ) {
 }
 add_action( 'wpatai_tts_generate', 'wpatai_tts_generate_action', 10, 3 );
 
-// 卸载插件的时候删掉设置项
+// Eliminar elementos de configuración al desinstalar el plugin
 function wpatai_delete_plugin_settings() {
     delete_option('wpatai_settings');
 }
