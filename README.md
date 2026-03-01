@@ -110,8 +110,3 @@ Archivo CSS: wpai-style.css
 Archivo JS de traducción de voz: wpai-script.js
 Archivo JS de llamada PPT: docmee-ui-sdk-iframe.min.js
 Archivo de análisis Markdown: marked.min.js
-
-
-![2fa114d7cc7d22ae16005bb39925a2df.jpeg](https://i.miji.bid/2025/03/02/2fa114d7cc7d22ae16005bb39925a2df.jpeg)
-![be8d09585a3c7da555d8edd2997d46bf.jpeg](https://i.miji.bid/2025/02/24/be8d09585a3c7da555d8edd2997d46bf.jpeg)
-![a979fdb418172e3cbb8241d211e5fff5.jpeg](https://i.miji.bid/2025/02/17/a979fdb418172e3cbb8241d211e5fff5.jpeg)
