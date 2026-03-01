@@ -1,6 +1,6 @@
 <img src="https://github.com/suqicloud/wp-ai-chat/blob/main/ic_logo.png" width="60">
 
-# 小半WordPress ai助手  
+# Xiaoban WordPress Asistente AI
 
 [![License](https://img.shields.io/badge/license-GPL-blue.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/version-4.0.5-green.svg)](https://github.com/suqicloud/wp-ai-chat/releases/tag/4.0.5)
@@ -10,106 +10,106 @@
 
 
 
-## 📌 项目简介
+## 📌 Introducción del Proyecto
 
-全开源免费 - WordPress ai助手插件，可实现：ai对话聊天(文字、图片生成、视频生成)、ai对话语音播放、ai文章生成、ai文章SEO分析、ai文章总结、ai文章翻译、ai生成PPT、ai文档分析、ai智能体应用、文章内容语音播放。  
-不会用的先看文档，就一个基础配置和apikey对接的事，这种插件没有什么高难度要求。
-
-
-这个项目暂时不更新新功能了，目前不影响使用。
-以后偏向商业源码无忌AI工具相关的更新： https://www.wujiit.com
+Totalmente de código abierto y gratuito - Plugin de asistente AI para WordPress, puede implementar: chat de conversación AI (texto, generación de imágenes, generación de videos), reproducción de voz de conversación AI, generación de artículos AI, análisis SEO de artículos AI, resumen de artículos AI, traducción de artículos AI, generación de PPT por AI, análisis de documentos AI, aplicaciones de agentes inteligentes AI, reproducción de voz del contenido de artículos.
+Si no sabe cómo usarlo, primero lea la documentación, es solo cuestión de una configuración básica y la conexión con apikey, este tipo de plugin no tiene requisitos de alta dificultad.
 
 
-## 🚀 功能特性
-
-1. 内置deepseek文本接口  
-1. 内置阿里通义千问文本接口  
-1. 内置百度千帆(文心一言)文本接口  
-1. 内置豆包ai文本接口  
-1. 内置Kimi文本接口  
-1. 内置OpenAI文本接口  
-1. 内置腾讯混元文本接口  
-1. 内置Grok文本接口  
-1. 内置Gemini文本接口 
-1. 内置Claude文本接口 
-1. 内置讯飞星火文本接口  
-1. 内置自定义AI文本模型接口  
-1. 支持阿里智能体应用对接  
-1. 支持火山引擎智能体应用对接  
-1. 支持腾讯元器智能体应用对接  
-1. 支持字节扣子智能体应用对接  
-1. 支持文多多AIPPT接口生成PPT文件  
-1. 支持pollinations ai的文生图模型  
-1. 支持通义千问的图片生成模型  
-1. 支持通义千问的视频生成模型(文生视频、图生视频) 
-1. 支持通义千问和讯飞星火部分模型联网搜索
-1. 模型参数是自定义填写  
-1. 系统会用一个单独的数据表保存对话记录的第一句  
-1. 用户可以删掉自己的历史对话记录  
-1. 后台可以删掉用户的对话记录  
-1. 后台可以删掉用户的智能体应用对话  
-1. 可以通过关键词生成文章  
-1. 可以通过AI接口对文章进行总结  
-1. 前台显示AI助手入口  
-1. 只允许登录用户使用  
-1. 支持Markdown格式
-1. DeepSeek余额信息  
-1. 通过AI接口对文章进行翻译  
-1. 支持对接腾讯云、百度云 TTS服务实现语音播放文章内容  
-1. 可以实现语音播放AI回复的文字内容  
-1. 可以自定义提示词  
-1. 自定义提示词教程链接  
-1. Markdown内容板块自动加载复制按钮  
-1. 支持违规关键词检测  
-1. AI生成PPT可以验证会员权限(部分网站可能不行)  
-1. 智能体应用开场问题  
-1. 自定义前台ai助手名称等  
-1. 自定义未登录提示文字  
-1. 支持前台用户选择接口  
-1. 支持kimi和通义千问qwen-long上传文件分析文档内容  
-1. 支持前台用户选择模型参数  
-1. 支持对文章内容进行SEO分析，同时检测错别字  
+Este proyecto temporalmente no actualizará nuevas funciones, actualmente no afecta el uso.
+En el futuro, las actualizaciones se centrarán en el código fuente comercial relacionado con herramientas AI Wuji: https://www.wujiit.com
 
 
-## 📥 安装
+## 🚀 Características Funcionales
 
-1. 下载最新版本文件。
-2. 进入WordPress插件后台
-3. 上传本地文件包安装
+1. Interfaz de texto DeepSeek integrada
+1. Interfaz de texto Alibaba Tongyi Qianwen integrada
+1. Interfaz de texto Baidu Qianfan (Wenxin Yiyan) integrada
+1. Interfaz de texto Doubao AI integrada
+1. Interfaz de texto Kimi integrada
+1. Interfaz de texto OpenAI integrada
+1. Interfaz de texto Tencent Hunyuan integrada
+1. Interfaz de texto Grok integrada
+1. Interfaz de texto Gemini integrada
+1. Interfaz de texto Claude integrada
+1. Interfaz de texto iFlytek Xinghuo integrada
+1. Interfaz de modelo de texto AI personalizado integrada
+1. Soporte para conexión de aplicaciones de agentes inteligentes Alibaba
+1. Soporte para conexión de aplicaciones de agentes inteligentes Volcengine
+1. Soporte para conexión de aplicaciones de agentes inteligentes Tencent Yuanqi
+1. Soporte para conexión de aplicaciones de agentes inteligentes ByteDance Coze
+1. Soporte para interfaz Wenduoduo AIPPT para generar archivos PPT
+1. Soporte para modelo de texto a imagen de pollinations ai
+1. Soporte para modelo de generación de imágenes de Tongyi Qianwen
+1. Soporte para modelo de generación de videos de Tongyi Qianwen (texto a video, imagen a video)
+1. Soporte para búsqueda en línea de algunos modelos de Tongyi Qianwen e iFlytek Xinghuo
+1. Los parámetros del modelo se configuran manualmente
+1. El sistema usa una tabla de datos separada para guardar la primera frase del registro de conversación
+1. Los usuarios pueden eliminar sus propios registros de conversación histórica
+1. El backend puede eliminar los registros de conversación de los usuarios
+1. El backend puede eliminar las conversaciones de aplicaciones de agentes inteligentes de los usuarios
+1. Se pueden generar artículos a través de palabras clave
+1. Se puede resumir artículos a través de la interfaz AI
+1. El frontend muestra la entrada del asistente AI
+1. Solo permite el uso a usuarios registrados
+1. Soporte para formato Markdown
+1. Información de saldo de DeepSeek
+1. Traducción de artículos a través de la interfaz AI
+1. Soporte para conectar servicios TTS de Tencent Cloud y Baidu Cloud para reproducir voz del contenido de artículos
+1. Puede reproducir por voz el contenido de texto de las respuestas AI
+1. Se pueden personalizar los prompts
+1. Enlace al tutorial de personalización de prompts
+1. Carga automática del botón de copiar en el panel de contenido Markdown
+1. Soporte para detección de palabras clave prohibidas
+1. La generación de PPT por AI puede verificar permisos de membresía (puede no funcionar en algunos sitios)
+1. Preguntas de apertura de aplicaciones de agentes inteligentes
+1. Personalización del nombre del asistente AI en el frontend, etc.
+1. Personalización del texto de aviso para usuarios no registrados
+1. Soporte para que usuarios del frontend seleccionen la interfaz
+1. Soporte para que Kimi y Tongyi Qianwen qwen-long carguen archivos y analicen contenido de documentos
+1. Soporte para que usuarios del frontend seleccionen parámetros del modelo
+1. Soporte para análisis SEO del contenido de artículos, con detección simultánea de errores tipográficos
 
-或者直接上传到服务器的网站插件目录/wp-content/plugins也行，记得设置权限。  
 
-开发基础：WordPress 6.7.1  
-php版本：php 8.0  
+## 📥 Instalación
 
-## 🛠️ 使用方法
+1. Descargue el archivo de la última versión.
+2. Ingrese al backend de plugins de WordPress
+3. Suba el paquete de archivos local para instalar
 
-插件启用会自动创建一个前台对话页面。如果没有自动创建，就自己手动加短代码：  [deepseek_chat]  
+O puede subir directamente al directorio de plugins del sitio web en el servidor /wp-content/plugins, recuerde configurar los permisos.
 
-1 - 文章翻译的接口要单独设置，因为这本来是我另外一个插件的，我合并过来了，不想折腾，就直接用了。   
-2 - ai生成PPT也是独立插件进行的合并，并且这个功能原本是根据我自己用的主题调整的，可能兼容性不好。    
+Base de desarrollo: WordPress 6.7.1
+Versión de PHP: PHP 8.0
 
+## 🛠️ Método de Uso
 
-如果插件彻底不用了，自己到数据库去删掉这个数据表：deepseek_chat_logs、deepseek_agent_chat_logs这2个数据表。
+La activación del plugin creará automáticamente una página de conversación en el frontend. Si no se crea automáticamente, puede agregar manualmente el shortcode: [deepseek_chat]
 
-教程：https://www.wujiit.com/wpaidocs
-
-主题页面需要支持全宽或者全屏模式，不然很狭窄。如果不支持就自己查看你主题的样式，通过代码实现deepseek助手页面全屏显示。  
-
-这款插件最早是为了测试deepseek自己写代码的能力，有一部分是deepseek自己写的代码(ai对话对接deepseek和最早版本的文章生成)，后面又合并了其他插件，所以代码里面的函数名称啥的看起来很乱，但是都写了注释。  
+1 - La interfaz de traducción de artículos debe configurarse por separado, porque originalmente era otro plugin mío, lo combiné y no quería complicarme, así que lo usé directamente.
+2 - La generación de PPT por AI también es una combinación de un plugin independiente, y esta función fue ajustada originalmente según el tema que yo usaba, puede que la compatibilidad no sea buena.
 
 
-## 文件说明
+Si deja de usar el plugin por completo, elimine manualmente estas tablas de datos en la base de datos: deepseek_chat_logs, deepseek_agent_chat_logs, estas 2 tablas de datos.
 
-主文件： wp-ai-chat.php  
-翻译语音文件： wpaitranslate.php  
-ai生成ppt文件： wpaippt.php  
-智能体应用文件： wpaidashscope.php  
-主要js文件： wpai-chat.js  
-css文件：wpai-style.css  
-翻译语音js文件： wpai-script.js  
-ppt调用js文件： docmee-ui-sdk-iframe.min.js  
-Markdown解析文件： marked.min.js 
+Tutorial: https://www.wujiit.com/wpaidocs
+
+La página del tema necesita soportar modo de ancho completo o pantalla completa, de lo contrario será muy estrecho. Si no es compatible, verifique los estilos de su tema y logre que la página del asistente deepseek se muestre en pantalla completa a través del código.
+
+Este plugin fue creado originalmente para probar la capacidad de deepseek de escribir código por sí mismo, parte del código fue escrito por deepseek (la conexión de conversación AI con deepseek y la versión original de generación de artículos), luego se combinaron otros plugins, por lo que los nombres de funciones en el código pueden parecer desordenados, pero todos tienen comentarios.
+
+
+## Descripción de Archivos
+
+Archivo principal: wp-ai-chat.php
+Archivo de traducción de voz: wpaitranslate.php
+Archivo de generación de PPT por AI: wpaippt.php
+Archivo de aplicaciones de agentes inteligentes: wpaidashscope.php
+Archivo JS principal: wpai-chat.js
+Archivo CSS: wpai-style.css
+Archivo JS de traducción de voz: wpai-script.js
+Archivo JS de llamada PPT: docmee-ui-sdk-iframe.min.js
+Archivo de análisis Markdown: marked.min.js
 
 
 ![2fa114d7cc7d22ae16005bb39925a2df.jpeg](https://i.miji.bid/2025/03/02/2fa114d7cc7d22ae16005bb39925a2df.jpeg)
